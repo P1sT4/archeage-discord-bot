@@ -65,7 +65,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	var oldNotices archeage.Notices
 	ticker := time.Tick(time.Second * 10)
 	for _ = range ticker {
-		fmt.Println(".")
+		fmt.Print(".")
 		newNotices, err := aa.FetchNotice()
 		if err != nil || len(newNotices) == 0 {
 			log.Println(err)
@@ -76,7 +76,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 			for _, notice := range diffNotices {
 				msg := fmt.Sprintf("[%s] %s %s", notice.Category, notice.Title, notice.URL)
 				s.ChannelMessageSend(m.ChannelID, msg)
-				log.Println(msg)
+				log.Println("\n" + msg)
 			}
 		}
 		oldNotices = newNotices
