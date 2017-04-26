@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"time"
@@ -13,9 +14,15 @@ import (
 
 // Variables used for command line parameters
 var (
-	Token string = "MzAyNTc0NTA0MzQ4MDkwMzY4.C-F8cQ.5ZUMS_5TRGupESp7vNkYViOAN8M"
+	Token string
 	BotID string
 )
+
+func init() {
+
+	flag.StringVar(&Token, "t", "", "Bot Token")
+	flag.Parse()
+}
 
 func main() {
 
