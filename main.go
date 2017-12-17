@@ -112,14 +112,18 @@ func auctionMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 			return ""
 		}()
 
-		result, err := aa.Auction("KYPROSA", keyword)
-		var msg string
+		result, err := aa.Auction("TOTAL", keyword, quantity)
 		if err != nil {
-			msg = err.Error()
-		} else if len(result) > 0 {
-			msg = fmt.Sprintf("[%v] %v개의 가격은 %v 입니다.", result[0].Name, quantity, result[0].SinglePrice.Mul(quantity).String())
+			s.ChannelMessageSend(m.ChannelID, err.Error())
+			log.Println(err)
+			return
+		}
+		lack, price := result.Price(quantity)
+		var msg string
+		if lack {
+			msg = "경매장에 아이템이 모자랍니다."
 		} else {
-			msg = "결과를 찾을 수 없습니다."
+			msg = fmt.Sprintf("`%v` x `%v` = `%v`", result[0].Name, quantity, price.String())
 		}
 		s.ChannelMessageSend(m.ChannelID, msg)
 

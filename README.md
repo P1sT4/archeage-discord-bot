@@ -1,10 +1,10 @@
 # archeage-discord-bot
+
 ArcheAge Discord Bot
 
 ## Description
 
 이 봇은 디스코드에서 아키에이지와 관련된 데이터를 불러오기 위해 만들어졌습니다. [archeage-go](https://github.com/geeksbaek/archeage-go) 패키지를 사용하며, 빌드를 거치면 로컬에서 구동할 수 있습니다.
-
 
 ## Usage
 
